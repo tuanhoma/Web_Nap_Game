@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+  # PHP 8.2 + Apache
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: game_topup_app
+    ports:
+      - "8888:80"
+    volumes:
+      - ./src:/var/www/html
+      - ./vendor:/var/www/html/vendor
+      - ./.env:/var/www/html/.env
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html/public
+    networks:
+      - game_network
+    restart: unless-stopped
+
+  # MySQL 8
+  db:
+    image: mysql:8.0
+    container_name: game_topup_db
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: game_topup
+      MYSQL_USER: game_user
+      MYSQL_PASSWORD: "123456"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot_password"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - game_network
+    restart: unless-stopped
+
+  # phpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: game_topup_pma
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: root_password
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - game_network
+    restart: unless-stopped
+
+networks:
+  game_network:
+    driver: bridge
+
+volumes:
+  mysql_data:
+    driver: local

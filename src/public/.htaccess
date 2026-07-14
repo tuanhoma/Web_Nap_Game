@@ -1,0 +1,17 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Nếu file hoặc thư mục thật sự tồn tại, không rewrite
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Chuyển tất cả request về index.php
+    RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+</IfModule>
+
+# Bảo mật: không cho truy cập file .env
+<FilesMatch "^\.env">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
