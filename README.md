@@ -2,7 +2,7 @@
 
 Dự án mô phỏng Cổng Nạp Game (Game Top-up Portal) sử dụng PHP 8.2 thuần, MySQL 8 và Docker. Tích hợp thanh toán trực tuyến qua ví MoMo (Sandbox).
 
-## 🚀 Tính năng nổi bật
+## Tính năng nổi bật
 
 - **Kiến trúc MVC nhẹ**: Custom framework không dùng thư viện ngoài (trừ phpdotenv), cấu trúc rõ ràng (Controllers, Services, Repositories, Models).
 - **Authentication**: Đăng ký, đăng nhập bảo mật bằng session và `password_hash`. Phân quyền User/Admin.
@@ -10,12 +10,12 @@ Dự án mô phỏng Cổng Nạp Game (Game Top-up Portal) sử dụng PHP 8.2 
 - **UI/UX hiện đại**: Giao diện mang phong cách Gaming, dark theme với hiệu ứng Glassmorphism (Sử dụng Bootstrap 5 kết hợp Custom CSS).
 - **Admin Panel**: Dashboard quản lý người dùng, giao dịch, và tạo thêm gói nạp game.
 
-## 🛠 Yêu cầu hệ thống
+## Yêu cầu hệ thống
 
 - Docker
 - Docker Compose
 
-## ⚡ Hướng dẫn cài đặt & chạy
+## Hướng dẫn cài đặt & chạy
 
 1. **Clone/Tải source code** về thư mục máy tính.
 2. **Khởi chạy bằng Docker Compose**:
@@ -29,7 +29,7 @@ Dự án mô phỏng Cổng Nạp Game (Game Top-up Portal) sử dụng PHP 8.2 
    - Trang chủ: http://localhost:8888
    - phpMyAdmin: http://localhost:8081 (User: `root` / Pass: `root_password`)
 
-## 🔑 Tài khoản Demo
+## Tài khoản Demo
 
 Database đã được tạo sẵn các tài khoản sau:
 
@@ -39,7 +39,7 @@ Database đã được tạo sẵn các tài khoản sau:
 | **User** | `user1` | `123456` |
 | **User** | `user2` | `123456` |
 
-## 💳 Hướng dẫn test thanh toán MoMo
+## Hướng dẫn test thanh toán MoMo
 
 Ứng dụng đang cấu hình mặc định sử dụng môi trường thử nghiệm (Sandbox) của MoMo:
 1. Đăng nhập bằng tài khoản **user1** hoặc tài khoản bạn mới tạo.
@@ -52,7 +52,7 @@ Database đã được tạo sẵn các tài khoản sau:
 
 > **Lưu ý về IPN (Webhook)**: Trên môi trường local (localhost), MoMo server không thể gửi POST request IPN trực tiếp đến localhost của bạn. Tuy nhiên, luồng thanh toán vẫn hoạt động bình thường nhờ cơ chế kiểm tra kết quả qua Redirect URL (Callback).
 
-## 📂 Cấu trúc thư mục
+## Cấu trúc thư mục
 
 ```text
 .
@@ -77,7 +77,7 @@ Database đã được tạo sẵn các tài khoản sau:
 └── README.md
 ```
 
-## 🔒 Bảo mật (Security)
+## Bảo mật (Security)
 
 Dự án áp dụng các biện pháp bảo mật cơ bản cho môi trường Web:
 - **SQL Injection**: Sử dụng hoàn toàn **PDO Prepared Statements** trong tầng Repository.
